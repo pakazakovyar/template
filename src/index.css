@@ -215,82 +215,84 @@ body {
     margin-top: 40px;
 }
 
-.first-col{
+.first-col {
     display: flex;
 
 }
 
-.track img{
+.track img {
     max-width: 70px;
     max-height: 70px;
     border: 1px solid #ccc;
 }
-.track{
+
+.track {
     display: flex;
     justify-content: center;
 }
 
 
 .popular-tracks {
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 0 20px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
 }
 
 .popular-tracks h2 {
-  font-size: 28px;
-  margin-bottom: 20px;
-  text-align: center;
-  color: #222;
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #222;
 }
 
 .first-col,
 .second-col,
 .third-col {
-  flex: 1;
-  margin: 0 10px;
+    flex: 1;
+    margin: 0 10px;
 }
 
-.popular-tracks > div {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.popular-tracks>div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .popular-tracks {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 
 .track {
-  display: flex;
-  gap: 15px;
-  border-radius: 8px;
-  padding: 10px;
-  align-items: center;
+    display: flex;
+    gap: 15px;
+    border-radius: 8px;
+    padding: 10px;
+    align-items: center;
 }
 
 .track img {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 6px;
-  flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
 }
 
 .info h4 {
-  margin: 0 0 6px;
-  font-size: 16px;
-  color: #222;
+    margin: 0 0 6px;
+    font-size: 16px;
+    color: #222;
 }
 
 .info p {
-  margin: 0 0 8px;
-  font-size: 14px;
-  color: #555;
+    margin: 0 0 8px;
+    font-size: 14px;
+    color: #555;
 }
+
 .heading {
     text-align: center;
     margin-bottom: 20px;
@@ -398,7 +400,7 @@ body {
     color: #fff;
 }
 
-.heading hr{
+.heading hr {
     background-color: red;
     width: 50px;
     height: 2px;
@@ -441,14 +443,15 @@ body {
 
 
 
-.search-results, .artists-sq {
+.search-results,
+.artists-sq {
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
     padding: 0 20px;
 }
 
-.artists-sq{
+.artists-sq {
     margin-top: 60px;
 }
 
@@ -485,22 +488,24 @@ body {
     opacity: 0.9;
 }
 
-.card-price a{
-  color: inherit;
-  text-decoration: none;
+.card-price a {
+    color: inherit;
+    text-decoration: none;
 
 
 }
-.card-listeners a{
+
+.card-listeners a {
     color: inherit;
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .card-price a:visited {
-  color: inherit;
+    color: inherit;
 }
+
 .card-listeners a:visited {
-  color: inherit;
+    color: inherit;
 }
 
 .artists-sq-list {
@@ -508,12 +513,12 @@ body {
     flex-wrap: wrap;
 }
 
-.albums-sq-list{
+.albums-sq-list {
     display: flex;
     flex-wrap: wrap;
 }
 
-.albums-sq{
+.albums-sq {
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
@@ -523,3 +528,111 @@ body {
 
 
 
+.tracks-container {
+    max-width: 700px;
+    margin: auto;
+    margin-top: 70px;
+    margin-bottom: 50px;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.track {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid #eee;
+}
+
+.track:first-child {
+    border-top: none;
+}
+
+.play-btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.cover {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 4px;
+}
+
+.info {
+    flex: 1;
+}
+
+.title {
+    font-weight: bold;
+}
+
+.artist {
+    color: #666;
+    font-size: 14px;
+}
+
+.duration {
+    color: #444;
+    font-size: 14px;
+}
+
+.more-tracks {
+    text-align: right;
+    color: #007aff;
+    font-size: 14px;
+    margin-top: 15px;
+    cursor: pointer;
+
+}
+
+
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+    background-color: #fff;
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    padding: 8px 4px;
+}
+
+.clear-btn,
+.search-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #999;
+    padding: 4px;
+}
+
+.clear-btn:hover,
+.search-btn:hover {
+    color: #333;
+}
+
+.divider {
+    width: 1px;
+    height: 20px;
+    background-color: #ccc;
+    margin: 0 8px;
+}
