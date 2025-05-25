@@ -303,7 +303,6 @@ body {
 }
 
 
-/* Footer Styles */
 .footer {
     background: #000;
     color: white;
@@ -405,3 +404,122 @@ body {
     height: 2px;
     border: none;
 }
+
+
+
+
+.secondary-nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.secondary-nav li {
+    display: inline-block;
+}
+
+.secondary-nav a {
+    text-decoration: none;
+    color: inherit;
+    padding-bottom: 5px;
+    position: relative;
+    display: inline-block;
+}
+
+.secondary-nav a:hover::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: red;
+}
+
+
+
+
+.search-results, .artists-sq {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+}
+
+.artists-sq{
+    margin-top: 60px;
+}
+
+
+.card {
+    position: relative;
+    width: 300px;
+    overflow: hidden;
+}
+
+.card-bg {
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    color: white;
+}
+
+.card-price {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.card-listeners {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.card-price a{
+  color: inherit;
+  text-decoration: none;
+
+
+}
+.card-listeners a{
+    color: inherit;
+  text-decoration: none;
+}
+
+.card-price a:visited {
+  color: inherit;
+}
+.card-listeners a:visited {
+  color: inherit;
+}
+
+.artists-sq-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.albums-sq-list{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.albums-sq{
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+    margin-top: 60px;
+}
+
+
+
