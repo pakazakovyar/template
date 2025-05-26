@@ -636,3 +636,25 @@ h2 {
     background-color: #ccc;
     margin: 0 8px;
 }
+
+.search-button{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.close-button{
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-left: 1rem;
+    cursor: pointer;
+
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+

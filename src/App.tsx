@@ -1,23 +1,24 @@
-import React from 'react';
+// App.tsx
+import React, { useState } from 'react';
+import Header from './components/Header';
+import MusicSection from './components/MusicSection';
+import SearchResults from './components/SearchResults';
+import Footer from './components/Footer';
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <p>
-//           Edit <code>src/App.tsx</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
+function App() {
+  const [searchQuery, setSearchQuery] = useState('');
 
-// export default App;
+  return (
+    <div className="App">
+      <Header onSearch={setSearchQuery} />
+      {searchQuery ? (
+        <SearchResults query={searchQuery} />
+      ) : (
+        <MusicSection />
+      )}
+      <Footer />
+    </div>
+  );
+}
+
+export default App;
