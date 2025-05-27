@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
 
+
+/**
+ * Компонент Header отображает логотип, навигацию и панель поиска.
+ * При клике на кнопку поиска переключается в режим ввода поискового запроса.
+ *
+ * @param onSearch - функция, вызываемая с поисковым запросом
+ */
 const Header = ({ onSearch }: { onSearch: (query: string) => void }) => {
   const [isSearching, setIsSearching] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');

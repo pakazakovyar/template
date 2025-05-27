@@ -1,5 +1,10 @@
 import React from 'react';
 
+
+
+/**
+ * Компонент Footer отображает информационные ссылки и нижнюю часть с юридическими ссылками и часовой зоной.
+ */
 const Footer = () => {
   const footerLinks = [
     {

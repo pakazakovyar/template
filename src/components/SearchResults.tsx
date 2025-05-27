@@ -40,13 +40,20 @@ interface SearchResultsProps {
   query: string;
   onSearch: (query: string) => void;
 }
-
+/**
+ * Компонент для отображения результатов поиска артистов, альбомов и треков.
+ * @param query - поисковый запрос
+ * @param onSearch - функция для обновления поискового запроса
+ */
 const SearchResults: React.FC<SearchResultsProps> = ({ query, onSearch }) => {
   const [artists, setArtists] = useState<Artist[]>([]);
   const [albums, setAlbums] = useState<Album[]>([]);
   const [tracks, setTracks] = useState<Track[]>([]);
   const [searchInput, setSearchInput] = useState(query);
 
+   /**
+   * Выполняет загрузку данных по поисковому запросу из API Last.fm.
+   */
   useEffect(() => {
     if (!query) return;
 
@@ -70,6 +77,10 @@ const SearchResults: React.FC<SearchResultsProps> = ({ query, onSearch }) => {
     setSearchInput(query);
   }, [query]);
 
+   /**
+   * Обрабатывает отправку формы поиска.
+   * @param e - событие формы
+   */
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchInput.trim()) {
@@ -77,10 +88,20 @@ const SearchResults: React.FC<SearchResultsProps> = ({ query, onSearch }) => {
     }
   };
 
+  /**
+   * Очищает поле ввода поиска.
+   */
   const handleClear = () => {
     setSearchInput("");
   };
 
+
+   /**
+   * Получает URL изображения нужного размера из массива изображений.
+   * @param images - массив изображений
+   * @param size - размер изображения (по умолчанию "extralarge")
+   * @returns URL изображения или пустая строка
+   */
   const getImageUrl = (images: Image[], size: Image["size"] = "extralarge") =>
     images.find(img => img.size === size)?.["#text"] || "";
 

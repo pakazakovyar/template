@@ -24,11 +24,19 @@ interface Track {
   url: string;
 }
 
+/**
+ * Компонент для отображения популярных артистов и треков.
+ * Загружает данные с Last.fm API при монтировании.
+ */
+
 const MusicSection = () => {
   const [artists, setArtists] = useState<Artist[]>([]);
   const [tracks, setTracks] = useState<Track[]>([]);
   const API_KEY = 'bb72f5eb66111e4ad11d3042e333c1f9';
 
+    /**
+   * Загружает топ-артистов и топ-треки с Last.fm API.
+   */
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -48,6 +56,12 @@ const MusicSection = () => {
     fetchData();
   }, []);
 
+   /**
+   * Возвращает URL изображения заданного размера.
+   * @param images - массив изображений
+   * @param size - желаемый размер (по умолчанию 'extralarge')
+   * @returns URL изображения или пустая строка, если не найдено
+   */
   const getImage = (images?: Image[], size: string = 'extralarge') =>
     images?.find(img => img.size === size)?.['#text'] || '';
 
