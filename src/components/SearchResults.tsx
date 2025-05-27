@@ -1,5 +1,10 @@
 import React from 'react';
 
+
+
+
+
+
 const cardData = {
   title: "7000$",
   listeners: "54,533 listeners",

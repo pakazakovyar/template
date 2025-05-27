@@ -1,118 +1,110 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-const artistData = {
-  name: "Jin",
-  image: "https://lastfm.freetls.fastly.net/i/u/770x0/d0bc80236d618fc55b2912717ac6925a.jpg",
-  genres: ["RAP", "BTS", "HIP HOP"],
-  bio: "There are several artists with this name. 1) Kim Seok-jin (Hangul: 김석진; born on December 4, 1992), also known by his stage name Jin, is a South Korean singer-songwriter. He is a member and voca…",
-  releases: [
-    {
-      type: "Latest RELEASE",
-      title: "Kgerou",
-      detail: "20 May 2025",
-      image: "https://lastfm.freetls.fastly.net/i/u/300x300/c6f59c1e5e7240a4c0d427abd71f3dbb.jpg"
-    },
-    {
-      type: "Popular this week",
-      title: "Don't Say You Love Me",
-      detail: "72,060 listeners",
-      image: "https://lastfm.freetls.fastly.net/i/u/300x300/c6f59c1e5e7240a4c0d427abd71f3dbb.jpg"
-    }
-  ]
-};
+interface Image {
+  size: string;
+  ['#text']: string;
+}
 
-const smallArtistData = {
-  name: "Tyler, The Creator",
-  image: "https://lastfm.freetls.fastly.net/i/u/300x300/2b580be01bbb456d8deaf89f545e7b39.jpg",
-  genres: ["hip-hop", "rap", "ofwgkta"]
-};
+interface Artist {
+  name: string;
+  playcount?: string;
+  listeners?: string;
+  mbid?: string;
+  image?: Image[];
+  url?: string;
+}
 
-const trackData = {
-  title: "Don't Say You Love Me",
-  artist: "Jin",
-  image: "https://lastfm.freetls.fastly.net/i/u/300x300/f19c148dc2502de161e9835f140a8114.jpg",
-  genres: ["hip-hop", "rap", "ofwgkta"]
-};
+interface Track {
+  name: string;
+  playcount?: string;
+  listeners?: string;
+  mbid?: string;
+  artist?: { name: string , url: string};
+  image?: Image[];
+  url: string;
+}
 
 const MusicSection = () => {
+  const [artists, setArtists] = useState<Artist[]>([]);
+  const [tracks, setTracks] = useState<Track[]>([]);
+  const API_KEY = 'bb72f5eb66111e4ad11d3042e333c1f9';
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const artistRes = await fetch(`https://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=${API_KEY}&format=json&limit=12`);
+        const trackRes = await fetch(`https://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=${API_KEY}&format=json&limit=9`);
+
+        const artistJson = await artistRes.json();
+        const trackJson = await trackRes.json();
+
+        setArtists(artistJson.artists.artist);
+        setTracks(trackJson.tracks.track);
+      } catch (error) {
+        console.error('Failed to fetch data from Last.fm', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const getImage = (images?: Image[], size: string = 'extralarge') =>
+    images?.find(img => img.size === size)?.['#text'] || '';
+
   return (
     <section className="music-section">
       <div className="heading"><h2>Hot Right now</h2><hr /></div>
-
-      <div className="tag-layout">
-        {[1, 2].map((item) => (
-          <div className="tag-main" key={item}>
-            <img src={artistData.image} alt={artistData.name} />
-            <div className="tag-info">
-              <h3>{artistData.name}</h3>
-              <div className="genres">
-                <ul>
-                  {artistData.genres.map((genre, index) => (
-                    <li key={index}><a href="">{genre}</a></li>
-                  ))}
-                </ul>
-              </div>
-              <p>
-                {artistData.bio}
-                <a href="#">read more</a>
-              </p>
-              <span className="releases">
-                {artistData.releases.map((release, index) => (
-                  <div className="releas" key={index}>
-                    <img src={release.image} alt={release.title} />
-                    <div className="content">
-                      <span className="Blure">{release.type}</span>
-                      <h4>{release.title}</h4>
-                      <p>{release.detail}</p>
-                    </div>
-                  </div>
-                ))}
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {[1, 2].map((row) => (
+      <button onClick={() => console.log(artists)}>Вывести артистов в консоль</button>
+      <button onClick={() => console.log(tracks)}>Вывести артистов в консоль</button>
+      {[0, 1].map((row) => (
         <div className="guys" key={row}>
-          {[1, 2, 3, 4, 5, 6].map((item) => (
-            <div className="guy" key={item}>
-              <img src={smallArtistData.image} alt={smallArtistData.name} />
-              <h4>{smallArtistData.name}</h4>
-              <div className="mini-genres">
-                <ul>
-                  {smallArtistData.genres.map((genre, index) => (
-                    <li key={index}><a href="">{genre}</a></li>
-                  ))}
-                </ul>
+          {[0, 1, 2, 3, 4, 5].map((i) => {
+            const artist = artists[i];
+            return artist ? (
+              <div className="guy" key={i}>
+                <a href={artist.url}>
+                  <img src={getImage(artist.image, 'extralarge')} alt={artist.name} />
+                  <h4>{artist.name}</h4>
+                </a>
+
+                <div className="mini-genres">
+                  <ul>
+                    <li><a href="#">Genre 1</a></li>
+                    <li><a href="#">Genre 2</a></li>
+                  </ul>
+                </div>
               </div>
-            </div>
-          ))}
+            ) : null;
+          })}
         </div>
       ))}
 
       <div className="heading"><h2>Popular tracks</h2><hr /></div>
 
       <section className="popular-tracks">
-        {[1, 2, 3].map((col) => (
-          <div className={`${col === 1 ? 'first' : col === 2 ? 'second' : 'third'}-col`} key={col}>
+
+        {[0, 1, 2].map((col) => (
+          <div className={`${col === 0 ? 'first' : col === 1 ? 'second' : 'third'}-col`} key={col}>
             <div className="tracks">
-              {[1, 2, 3].map((item) => (
-                <div className="track" key={item}>
-                  <img src={trackData.image} alt={trackData.title} />
-                  <div className="info">
-                    <h4>{trackData.title}</h4>
-                    <p>{trackData.artist}</p>
-                    <div className="mini-genres">
-                      <ul>
-                        {trackData.genres.map((genre, index) => (
-                          <li key={index}><a href="">{genre}</a></li>
-                        ))}
-                      </ul>
+              {[0, 1, 2].map((i) => {
+                const trackIndex = col * 3 + i;
+                const track = tracks[trackIndex];
+                return track ? (
+                  <div className="track" key={trackIndex}>
+                    <img src={getImage(track.image, 'extralarge')} alt={track.name} />
+                    <div className="info">
+                      <h4><a href={track.url}>{track.name}</a></h4>
+                      <p><a href={track.artist?.url}>{track.artist?.name}</a></p>
+                      <div className="mini-genres">
+                        <ul>
+                          <li><a href="#">Genre 1</a></li>
+                          <li><a href="#">Genre 2</a></li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ) : null;
+              })}
             </div>
           </div>
         ))}
