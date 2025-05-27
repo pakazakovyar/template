@@ -44,9 +44,7 @@ const Header = ({ onSearch }: { onSearch: (query: string) => void }) => {
             }}
             className="search-input"
           />
-          <button onClick={handleSearch} className="search-go-button">
-            Go
-          </button>
+         
           <button
             onClick={() => {
               setIsSearching(false);

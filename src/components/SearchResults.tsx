@@ -1,28 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+
+const API_KEY = "bb72f5eb66111e4ad11d3042e333c1f9";
+const BASE_URL = "https://ws.audioscrobbler.com/2.0/";
+
+
+interface Image {
+  "#text": string;
+  size: "small" | "medium" | "large" | "extralarge" | "mega";
+}
+
+interface Artist {
+  name: string;
+  listeners: string;
+  mbid: string;
+  url: string;
+  streamable: string;
+  image: Image[];
+}
+
+
+interface Album {
+  name: string;
+  artist: string;
+  mbid: string;
+  url: string;
+  streamable: string;
+  image: Image[];
+}
+
+interface Track {
+  name: string;
+  artist: string;
+  url: string;
+  streamable: string;
+  listeners: string;
+  image: Image[];
+  mbid: string;
+}
 
 
 
-
-
-
-const cardData = {
-  title: "7000$",
-  listeners: "54,533 listeners",
-  image: "https://lastfm.freetls.fastly.net/i/u/300x300/e3ff122663948793faef79db6cabba18.jpg"
-};
-
-const albumData = {
-  title: "Blue Chips 7000",
-  artist: "Action Bronson",
-  image: "https://lastfm.freetls.fastly.net/i/u/300x300/950cd041e9a46230788b63c4e75ef77f.jpg"
-};
-
-const trackData = {
-  title: "7000 (Reprise)",
-  artist: "Neon Indian",
-  image: "https://lastfm.freetls.fastly.net/i/u/64s/c2fb8d2a017e4f00a267cb6bad7b96ca.jpg",
-  duration: "0:58"
-};
 
 
 interface SearchResultsProps {
@@ -30,21 +47,51 @@ interface SearchResultsProps {
 }
 
 const SearchResults: React.FC<SearchResultsProps> = ({ query }) => {
+  const [artists, setArtists] = useState<Artist[]>([]);
+  const [albums, setAlbums] = useState<Album[]>([]);
+  const [tracks, setTracks] = useState<Track[]>([]);
+
+  useEffect(() => {
+    if (!query) return;
+
+    const fetchData = async () => {
+      try {
+        const [artistRes, albumRes, trackRes] = await Promise.all([
+          fetch(`${BASE_URL}?method=artist.search&artist=${encodeURIComponent(query)}&api_key=${API_KEY}&format=json`).then(res => res.json()),
+          fetch(`${BASE_URL}?method=album.search&album=${encodeURIComponent(query)}&api_key=${API_KEY}&format=json`).then(res => res.json()),
+          fetch(`${BASE_URL}?method=track.search&track=${encodeURIComponent(query)}&api_key=${API_KEY}&format=json`).then(res => res.json())
+        ]);
+
+        setArtists(artistRes.results.artistmatches.artist || []);
+        setAlbums(albumRes.results.albummatches.album || []);
+        setTracks(trackRes.results.trackmatches.track || []);
+      } catch (error) {
+        console.error("Ошибка при загрузке данных:", error);
+      }
+    };
+
+    fetchData();
+  }, [query]);
+
+  const getImageUrl = (images: Image[], size: Image["size"] = "extralarge") =>
+    images.find(img => img.size === size)?.["#text"] || "";
+
   return (
     <div className="search-results">
       <h1>Search results for "{query}"</h1>
 
       <nav className="secondary-nav" aria-label="Secondary navigation">
         <ul>
-          <li><a href="">Top Results</a></li>
-          <li><a href="">Artists</a></li>
-          <li><a href="">Albums</a></li>
-          <li><a href="">Tracks</a></li>
+          <li><a href="#">Top Results</a></li>
+          <li><a href="#">Artists</a></li>
+          <li><a href="#">Albums</a></li>
+          <li><a href="#">Tracks</a></li>
         </ul>
       </nav>
 
       <section className="search-wrapper">
-        <input type="text" placeholder="Search..." value="7000" className="search-input" />
+
+        <input type="text" placeholder="Search..." value={query} className="search-input" readOnly />
         <button className="clear-btn">&times;</button>
         <div className="divider"></div>
         <button className="search-btn">
@@ -59,12 +106,14 @@ const SearchResults: React.FC<SearchResultsProps> = ({ query }) => {
       <section className="artists-sq">
         <h2>Artists</h2>
         <div className="artists-sq-list">
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-            <div className="card" key={item}>
-              <img src={cardData.image} alt="Background" className="card-bg" />
+          {artists.slice(0, 8).map((artist, index) => (
+            <div className="card" key={index}>
+              <img src={getImageUrl(artist.image)} alt={artist.name} className="card-bg" />
               <div className="card-content">
-                <div className="card-price"><a href="">{cardData.title}</a></div>
-                <div className="card-listeners">{cardData.listeners}</div>
+                <div className="card-price">
+                  <a href={artist.url} target="_blank" rel="noreferrer">{artist.name}</a>
+                </div>
+                <div className="card-listeners">{artist.listeners} listeners</div>
               </div>
             </div>
           ))}
@@ -75,12 +124,14 @@ const SearchResults: React.FC<SearchResultsProps> = ({ query }) => {
       <section className="albums-sq">
         <h2>Albums</h2>
         <div className="albums-sq-list">
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-            <div className="card" key={item}>
-              <img src={albumData.image} alt="Background" className="card-bg" />
+          {albums.slice(0, 8).map((album, index) => (
+            <div className="card" key={index}>
+              <img src={getImageUrl(album.image)} alt={album.name} className="card-bg" />
               <div className="card-content">
-                <div className="card-price"><a href="">{albumData.title}</a></div>
-                <div className="card-listeners"><a href="">{albumData.artist}</a></div>
+                <div className="card-price">
+                  <a href={album.url} target="_blank" rel="noreferrer">{album.name}</a>
+                </div>
+                <div className="card-listeners">{album.artist}</div>
               </div>
             </div>
           ))}
@@ -90,15 +141,15 @@ const SearchResults: React.FC<SearchResultsProps> = ({ query }) => {
 
       <section className="tracks-container">
         <h2>Tracks</h2>
-        {[1, 2, 3, 4, 5, 6].map((item) => (
-          <div className="track" key={item}>
+        {tracks.slice(0, 6).map((track, index) => (
+          <div className="track" key={index}>
             <button className="play-btn">▶</button>
-            <img src={trackData.image} className="cover" alt={trackData.title} />
+            <img src={getImageUrl(track.image, "medium")} className="cover" alt={track.name} />
             <div className="info">
-              <div className="title">{trackData.title}</div>
-              <div className="artist">{trackData.artist}</div>
+              <div className="title">{track.name}</div>
+              <div className="artist">{track.artist}</div>
             </div>
-            <div className="duration">{trackData.duration}</div>
+            <div className="duration">{track.listeners} listeners</div>
           </div>
         ))}
         <div className="more-tracks">More tracks &gt;</div>
@@ -106,5 +157,4 @@ const SearchResults: React.FC<SearchResultsProps> = ({ query }) => {
     </div>
   );
 };
-
 export default SearchResults;

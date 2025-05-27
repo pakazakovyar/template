@@ -54,8 +54,6 @@ const MusicSection = () => {
   return (
     <section className="music-section">
       <div className="heading"><h2>Hot Right now</h2><hr /></div>
-      <button onClick={() => console.log(artists)}>Вывести артистов в консоль</button>
-      <button onClick={() => console.log(tracks)}>Вывести артистов в консоль</button>
       {[0, 1].map((row) => (
         <div className="guys" key={row}>
           {[0, 1, 2, 3, 4, 5].map((i) => {
