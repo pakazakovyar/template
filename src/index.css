@@ -31,10 +31,6 @@ body {
     font-size: 14px;
 }
 
-.search-icon {
-    width: 16px;
-}
-
 .profile-icon {
     width: 30px;
     height: 30px;
@@ -86,7 +82,7 @@ body {
     display: block;
 }
 
-.tag-main > img {
+.tag-main>img {
     min-width: 500px;
 }
 
@@ -222,8 +218,9 @@ body {
 
 }
 
-.heading{
+.heading {
     margin-top: 50px;
+    text-align: center;
 }
 
 .first-col {
@@ -232,22 +229,32 @@ body {
 }
 
 .track img {
-    max-width: 70px;
-    max-height: 70px;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
     border: 1px solid #ccc;
 }
 
 .track {
     display: flex;
     justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid #eee;
+    gap: 15px;
+    border-radius: 8px;
 }
 
 
 .popular-tracks {
     max-width: 1200px;
-    margin:  auto;
+    margin: auto;
     padding: 0 20px;
     display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
 
 }
 
@@ -271,28 +278,10 @@ body {
     gap: 20px;
 }
 
-.popular-tracks {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-}
 
 
-.track {
-    display: flex;
-    gap: 15px;
-    border-radius: 8px;
-    padding: 10px;
-    align-items: center;
-}
 
-.track img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 6px;
-    flex-shrink: 0;
-}
+
 
 .info h4 {
     margin: 0 0 6px;
@@ -306,10 +295,7 @@ body {
     color: #555;
 }
 
-.heading {
-    text-align: center;
 
-}
 
 .heading h2 {
 
@@ -318,16 +304,17 @@ body {
     display: inline-block;
 }
 
-.guy a{
+.guy a {
     color: inherit;
-  text-decoration: none;
-  font: inherit;
+    text-decoration: none;
+    font: inherit;
 }
-.track a{
+
+.track a {
 
     color: inherit;
-  text-decoration: none;
-  font: inherit;
+    text-decoration: none;
+    font: inherit;
 
 }
 
@@ -469,9 +456,9 @@ body {
 
 
 
-.search-results > h1,
-.search-results nav{
-  max-width: 1200px;
+.search-results>h1,
+.search-results nav {
+    max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
     padding: 0 20px;
@@ -481,12 +468,10 @@ body {
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 60px;
     padding: 0 20px;
 }
 
-.artists-sq {
-    margin-top: 60px;
-}
 
 
 .card {
@@ -573,12 +558,6 @@ h2 {
     margin-bottom: 20px;
 }
 
-.track {
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-    border-top: 1px solid #eee;
-}
 
 .track:first-child {
     border-top: none;
@@ -634,11 +613,10 @@ h2 {
     align-items: center;
     border: 1px solid #ddd;
     border-radius: 4px;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 60px;
     background-color: #fff;
+    justify-content: center;
+    margin: 1rem auto;
+    max-width: 1200px;
 }
 
 .search-input {
@@ -647,6 +625,9 @@ h2 {
     outline: none;
     font-size: 14px;
     padding: 8px 4px;
+    width: 100%;
+    transition: border-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .clear-btn,
@@ -664,19 +645,14 @@ h2 {
     color: #333;
 }
 
-.divider {
-    width: 1px;
-    height: 20px;
-    background-color: #ccc;
-    margin: 0 8px;
-}
 
-.search-button{
+.search-button {
     background: none;
     border: none;
     cursor: pointer;
 }
-.close-button{
+
+.close-button {
     background-color: red;
     color: white;
     border: none;
@@ -687,9 +663,9 @@ h2 {
 }
 
 .search-bar {
-  display: flex;
-  align-items: center;
-  width: 100%;
+    display: flex;
+    align-items: center;
+    width: 100%;
 }
 
 
@@ -697,72 +673,51 @@ h2 {
 
 
 
-
-
-
-
-
-
-.search-wrapper {
-  display: flex;
-  justify-content: center;
-  margin: 1rem auto;
-  max-width: 1200px;
-}
 
 .search-wrapper form {
-  position: relative;
-  width: 100%;
+    position: relative;
+    width: 100%;
 }
-
-.search-input {
-  width: 100%;
-  outline: none;
-  transition: border-color 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-
-
 .clear-btn {
-  position: absolute;
-  right: 90px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  font-size: 1.5rem;
-  color: #999;
-  cursor: pointer;
-  z-index: 2;
+    position: absolute;
+    right: 90px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: #999;
+    cursor: pointer;
+    z-index: 2;
 }
 
 .clear-btn:hover {
-  color: #333;
+    color: #333;
 }
 
 .divider {
-  position: absolute;
-  right: 65px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 1px;
-  height: 24px;
-  background-color: #ccc;
+    position: absolute;
+    right: 65px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 24px;
+    background-color: #ccc;
+    margin: 0 8px;
 }
 
 .search-btn {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
 }
 
 .search-icon {
-  width: 24px;
-  height: 24px;
+    width: 24px;
+    height: 24px;
 }
