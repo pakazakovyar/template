@@ -691,3 +691,78 @@ h2 {
   align-items: center;
   width: 100%;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+.search-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 1rem auto;
+  max-width: 1200px;
+}
+
+.search-wrapper form {
+  position: relative;
+  width: 100%;
+}
+
+.search-input {
+  width: 100%;
+  outline: none;
+  transition: border-color 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+
+
+.clear-btn {
+  position: absolute;
+  right: 90px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #999;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.clear-btn:hover {
+  color: #333;
+}
+
+.divider {
+  position: absolute;
+  right: 65px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 24px;
+  background-color: #ccc;
+}
+
+.search-btn {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.search-icon {
+  width: 24px;
+  height: 24px;
+}

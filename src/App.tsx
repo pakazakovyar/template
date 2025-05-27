@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <Header onSearch={setSearchQuery} />
       {searchQuery ? (
-        <SearchResults query={searchQuery} />
+        <SearchResults query={searchQuery} onSearch={setSearchQuery} />
       ) : (
         <MusicSection />
       )}

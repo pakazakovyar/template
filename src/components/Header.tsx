@@ -1,4 +1,3 @@
-// Header.tsx
 import React, { useState } from 'react';
 
 const Header = ({ onSearch }: { onSearch: (query: string) => void }) => {
@@ -44,7 +43,7 @@ const Header = ({ onSearch }: { onSearch: (query: string) => void }) => {
             }}
             className="search-input"
           />
-         
+
           <button
             onClick={() => {
               setIsSearching(false);

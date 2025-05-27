@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 const API_KEY = "bb72f5eb66111e4ad11d3042e333c1f9";
 const BASE_URL = "https://ws.audioscrobbler.com/2.0/";
 
-
 interface Image {
   "#text": string;
   size: "small" | "medium" | "large" | "extralarge" | "mega";
@@ -17,7 +16,6 @@ interface Artist {
   streamable: string;
   image: Image[];
 }
-
 
 interface Album {
   name: string;
@@ -38,18 +36,16 @@ interface Track {
   mbid: string;
 }
 
-
-
-
-
 interface SearchResultsProps {
   query: string;
+  onSearch: (query: string) => void;
 }
 
-const SearchResults: React.FC<SearchResultsProps> = ({ query }) => {
+const SearchResults: React.FC<SearchResultsProps> = ({ query, onSearch }) => {
   const [artists, setArtists] = useState<Artist[]>([]);
   const [albums, setAlbums] = useState<Album[]>([]);
   const [tracks, setTracks] = useState<Track[]>([]);
+  const [searchInput, setSearchInput] = useState(query);
 
   useEffect(() => {
     if (!query) return;
@@ -71,7 +67,19 @@ const SearchResults: React.FC<SearchResultsProps> = ({ query }) => {
     };
 
     fetchData();
+    setSearchInput(query);
   }, [query]);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchInput.trim()) {
+      onSearch(searchInput);
+    }
+  };
+
+  const handleClear = () => {
+    setSearchInput("");
+  };
 
   const getImageUrl = (images: Image[], size: Image["size"] = "extralarge") =>
     images.find(img => img.size === size)?.["#text"] || "";
@@ -90,17 +98,26 @@ const SearchResults: React.FC<SearchResultsProps> = ({ query }) => {
       </nav>
 
       <section className="search-wrapper">
-
-        <input type="text" placeholder="Search..." value={query} className="search-input" readOnly />
-        <button className="clear-btn">&times;</button>
-        <div className="divider"></div>
-        <button className="search-btn">
-          <img
-            src="https://img.icons8.com/?size=100&id=132&format=png&color=1A1A1A"
-            alt="Search"
-            className="search-icon"
+        <form onSubmit={handleSearch}>
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            className="search-input"
           />
-        </button>
+          {searchInput && (
+            <button type="button" className="clear-btn" onClick={handleClear}>&times;</button>
+          )}
+          <div className="divider"></div>
+          <button type="submit" className="search-btn">
+            <img
+              src="https://img.icons8.com/?size=100&id=132&format=png&color=1A1A1A"
+              alt="Search"
+              className="search-icon"
+            />
+          </button>
+        </form>
       </section>
 
       <section className="artists-sq">
@@ -157,4 +174,5 @@ const SearchResults: React.FC<SearchResultsProps> = ({ query }) => {
     </div>
   );
 };
+
 export default SearchResults;
