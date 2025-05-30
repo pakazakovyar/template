@@ -22,7 +22,7 @@ const Header = ({ onSearch }: { onSearch: (query: string) => void }) => {
     <header className="header">
       {!isSearching ? (
         <>
-          <div className="logo">last.fm</div>
+          <div className="logo"><a href='/'>last.fm</a></div>
           <nav className="nav">
             <button onClick={() => setIsSearching(true)} className="search-button">
               <img
