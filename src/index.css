@@ -721,3 +721,13 @@ h2 {
     width: 24px;
     height: 24px;
 }
+
+
+.logo a {
+  text-decoration: none; 
+  color: inherit; 
+  outline: none; 
+  border: none; 
+  background: none; 
+  box-shadow: none; 
+}
